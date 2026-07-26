@@ -68,7 +68,7 @@ export default async function HomePage() {
                 O seu talento na industria offshore de Angola
               </h1>
               <p className="max-w-2xl text-base leading-relaxed text-sidebar-foreground/80 md:text-lg">
-                A Nome Valor Potencial liga profissionais qualificados as maiores
+                A Valor Potencial liga profissionais qualificados as maiores
                 operadoras petroliferas e empresas de servicos offshore do pais.
                 Candidate-se online e acompanhe todo o processo num so lugar.
               </p>

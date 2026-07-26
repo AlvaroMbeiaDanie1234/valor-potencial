@@ -23,7 +23,7 @@ export async function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-6 px-5">
-        <Link href="/" aria-label="Nome Valor Potencial — pagina inicial">
+        <Link href="/" aria-label="Valor Potencial — pagina inicial">
           <Logo />
         </Link>
 

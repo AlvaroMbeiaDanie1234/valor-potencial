@@ -55,7 +55,7 @@ export function AuthShell({
         </div>
 
         <p className="relative text-xs text-sidebar-foreground/60">
-          Nome Valor Potencial — Recrutamento e gestao de talento para a
+          Valor Potencial — Recrutamento e gestao de talento para a
           industria de petroleo e gas em Angola.
         </p>
       </aside>

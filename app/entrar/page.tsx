@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/session"
 export const metadata: Metadata = {
   title: "Entrar",
   description:
-    "Acesse a sua conta no portal de recrutamento da Nome Valor Potencial.",
+    "Acesse a sua conta no portal de recrutamento da Valor Potencial.",
 }
 
 export default async function SignInPage({

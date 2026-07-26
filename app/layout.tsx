@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     template: `%s | ${COMPANY.shortName}`,
   },
   description:
-    "Portal de recrutamento da Nome Valor Potencial. Consulte vagas em empresas petroliferas e offshore de Angola, submeta a sua candidatura e acompanhe todo o processo online.",
+    "Portal de recrutamento da Valor Potencial. Consulte vagas em empresas petroliferas e offshore de Angola, submeta a sua candidatura e acompanhe todo o processo online.",
   keywords: [
     "emprego offshore Angola",
     "vagas petroliferas",
     "recrutamento Angola",
-    "Nome Valor Potencial",
+    "Valor Potencial",
     "oil and gas Angola",
   ],
   generator: "v0.app",

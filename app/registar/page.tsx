@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/session"
 export const metadata: Metadata = {
   title: "Criar conta",
   description:
-    "Registe-se no portal da Nome Valor Potencial e candidate-se a vagas offshore em Angola.",
+    "Registe-se no portal da Valor Potencial e candidate-se a vagas offshore em Angola.",
 }
 
 export default async function SignUpPage({
