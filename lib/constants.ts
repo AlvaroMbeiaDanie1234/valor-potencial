@@ -3,8 +3,9 @@ export const COMPANY = {
   shortName: "VP",
   tagline: "Recrutamento especializado para a industria offshore de Angola",
   email: "geral@valorpotencial.com",
-  phone: "+244 923 000 000",
+  phone: "+244 934 008 517",
   address: "Luanda, Angola",
+  nif: "5001696882",
 }
 
 export const JOB_CATEGORIES = [

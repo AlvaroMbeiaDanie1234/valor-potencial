@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Mail, MapPin, Phone } from "lucide-react"
+import { Mail, MapPin, Phone, FileText } from "lucide-react"
 import { Logo } from "@/components/brand/logo"
 import { COMPANY } from "@/lib/constants"
 
@@ -58,6 +58,12 @@ export function SiteFooter() {
             <MapPin className="size-4 shrink-0" />
             {COMPANY.address}
           </p>
+          {COMPANY.nif && (
+            <p className="flex items-center gap-2 text-sm text-sidebar-foreground/70">
+              <FileText className="size-4 shrink-0" />
+              NIF: {COMPANY.nif}
+            </p>
+          )}
         </div>
       </div>
 

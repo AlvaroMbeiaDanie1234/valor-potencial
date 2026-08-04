@@ -41,10 +41,11 @@ export function AuthForm({ mode, next }: AuthFormProps) {
         : await authClient.signIn.email({ email, password })
 
       if (result.error) {
+        console.error("Auth Error:", result.error)
         setError(
-          isSignUp
+          result.error.message || (isSignUp
             ? "Nao foi possivel criar a conta. Este email pode ja estar registado."
-            : "Email ou palavra-passe incorrectos.",
+            : "Email ou palavra-passe incorrectos.")
         )
         return
       }
