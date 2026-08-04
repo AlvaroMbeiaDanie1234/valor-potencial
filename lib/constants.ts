@@ -2,7 +2,7 @@ export const COMPANY = {
   name: "Valor Potencial",
   shortName: "VP",
   tagline: "Recrutamento especializado para a industria offshore de Angola",
-  email: "recrutamento@valorpotencial.co.ao",
+  email: "geral@valorpotencial.com",
   phone: "+244 923 000 000",
   address: "Luanda, Angola",
 }

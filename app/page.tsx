@@ -2,41 +2,40 @@ import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
-  ClipboardCheck,
-  FileCheck2,
+  Briefcase,
+  Building2,
+  HardHat,
+  Laptop,
+  MapPin,
   Search,
   ShieldCheck,
-  UserPlus,
+  Ship,
+  Wrench,
+  Users,
+  Video,
+  MonitorSmartphone,
+  LineChart,
+  Target,
+  CheckCircle2,
+  Zap,
+  HeartHandshake,
+  BrainCircuit
 } from "lucide-react"
 import { JobCard } from "@/components/job-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { JOB_CATEGORIES } from "@/lib/constants"
+import { HeroSearch } from "@/components/home/hero-search"
+import { CategoryCard } from "@/components/home/category-card"
 import { getPublicStats, listOpenJobs } from "@/lib/queries/jobs"
 
-const STEPS = [
-  {
-    icon: UserPlus,
-    title: "Crie a sua conta",
-    text: "Registe-se em poucos minutos e construa o seu perfil profissional completo.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Envie os documentos",
-    text: "Anexe o CV, bilhete de identidade, certificados de habilitacoes e formacoes tecnicas.",
-  },
-  {
-    icon: Search,
-    title: "Candidate-se as vagas",
-    text: "Consulte as vagas abertas e submeta a candidatura com um unico clique.",
-  },
-  {
-    icon: ClipboardCheck,
-    title: "Acompanhe o processo",
-    text: "Veja em tempo real o estado da sua candidatura, da triagem a entrevista.",
-  },
+const TOP_CATEGORIES = [
+  { name: "Engenharia e Projetos", icon: HardHat, href: "/vagas?category=Engenharia+e+Projetos" },
+  { name: "Operações Offshore", icon: Ship, href: "/vagas?category=Operacoes+Offshore" },
+  { name: "Manutenção e Técnica", icon: Wrench, href: "/vagas?category=Manutencao+e+Tecnica" },
+  { name: "Tecnologia e TI", icon: Laptop, href: "/vagas?category=Tecnologia+e+TI" },
+  { name: "Administração e Finanças", icon: Briefcase, href: "/vagas?category=Administracao+e+Financas" },
+  { name: "Saúde e Segurança (HSE)", icon: ShieldCheck, href: "/vagas?category=Saude+e+Seguranca+(HSE)" },
 ]
 
 export default async function HomePage() {
@@ -47,210 +46,308 @@ export default async function HomePage() {
     <div className="flex min-h-svh flex-col">
       <SiteHeader />
 
-      <main>
-        {/* Hero */}
-        <section className="relative overflow-hidden bg-sidebar">
-          <Image
-            src="/images/hero-offshore.png"
-            alt="Plataforma petrolifera offshore ao largo da costa de Angola"
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover opacity-25"
-          />
-          <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-10 px-5 py-20 md:py-28">
-            <div className="flex max-w-3xl flex-col gap-6">
-              <span className="inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/12 px-3 py-1 text-xs font-medium text-accent">
-                <ShieldCheck className="size-3.5" />
-                Recrutamento certificado para petroleo e gas
-              </span>
-              <h1 className="text-4xl font-semibold leading-tight tracking-tight text-sidebar-foreground text-balance md:text-5xl lg:text-6xl">
-                O seu talento na industria offshore de Angola
-              </h1>
-              <p className="max-w-2xl text-base leading-relaxed text-sidebar-foreground/80 md:text-lg">
-                A Valor Potencial liga profissionais qualificados as maiores
-                operadoras petroliferas e empresas de servicos offshore do pais.
-                Candidate-se online e acompanhe todo o processo num so lugar.
-              </p>
+      <main className="flex-1 bg-background">
+        {/* PREMIUM HERO SECTION */}
+        <section className="relative overflow-hidden bg-emerald-950 pt-24 pb-32 lg:pt-36 lg:pb-40">
+          {/* Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="/images/hero-offshore.png"
+              alt="Plataforma petrolífera offshore"
+              fill
+              priority
+              className="object-cover opacity-20 mix-blend-overlay"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-emerald-950 via-emerald-950/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-900/60 to-transparent" />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-5 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-4 py-1.5 text-sm font-medium text-emerald-300 mb-6 backdrop-blur-sm">
+              <ShieldCheck className="size-4" />
+              O Portal de Emprego Líder no Setor Energético em Angola
+            </span>
+            <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-7xl mb-6 text-balance">
+              Encontre o Seu Futuro no <span className="text-emerald-400">Setor Offshore</span>
+            </h1>
+            <p className="mx-auto max-w-2xl text-lg text-emerald-100/80 mb-10 text-balance">
+              Explore milhares de vagas nas principais operadoras petrolíferas e empresas de serviços. Construa uma carreira de sucesso com a Valor Potencial.
+            </p>
+
+            <HeroSearch />
+
+            {/* Quick Stats in Hero */}
+            <div className="mt-12 flex flex-wrap justify-center gap-8 text-emerald-100/60 text-sm font-medium">
+              <div className="flex items-center gap-2">
+                <Briefcase className="size-5 text-emerald-400" />
+                <span><strong className="text-white text-base">{stats.openJobs}+</strong> Vagas Abertas</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Building2 className="size-5 text-emerald-400" />
+                <span><strong className="text-white text-base">50+</strong> Empresas Parceiras</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Users className="size-5 text-emerald-400" />
+                <span><strong className="text-white text-base">10k+</strong> Candidatos</span>
+              </div>
             </div>
-
-            {/* Search */}
-            <form
-              action="/vagas"
-              className="flex w-full max-w-2xl flex-col gap-3 rounded-lg border border-sidebar-border bg-background/95 p-3 backdrop-blur sm:flex-row"
-            >
-              <label htmlFor="hero-search" className="sr-only">
-                Pesquisar vagas por cargo, area ou localizacao
-              </label>
-              <Input
-                id="hero-search"
-                name="q"
-                placeholder="Cargo, area ou localizacao"
-                className="h-11 border-0 bg-transparent shadow-none focus-visible:ring-0"
-              />
-              <Button type="submit" size="lg" className="shrink-0">
-                <Search className="size-4" />
-                Procurar vagas
-              </Button>
-            </form>
-
-            {/* Stats */}
-            <dl className="flex flex-wrap gap-x-12 gap-y-6 border-t border-sidebar-border pt-8">
-              {[
-                { label: "Vagas abertas", value: stats.openJobs },
-                { label: "Posicoes disponiveis", value: stats.vacancies },
-                { label: "Candidaturas recebidas", value: stats.applications },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col gap-1">
-                  <dd className="text-3xl font-semibold tracking-tight text-accent">
-                    {stat.value}
-                  </dd>
-                  <dt className="text-sm text-sidebar-foreground/70">
-                    {stat.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
           </div>
         </section>
 
-        {/* Featured jobs */}
-        <section className="mx-auto w-full max-w-6xl px-5 py-20">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-3xl font-semibold tracking-tight text-balance">
-                Vagas em destaque
-              </h2>
-              <p className="text-muted-foreground">
-                Oportunidades recentes nas nossas empresas parceiras.
-              </p>
+        {/* TOP CATEGORIES */}
+        <section className="py-20 bg-secondary/30">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="mb-12 text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Categorias Populares</h2>
+              <p className="mt-4 text-lg text-muted-foreground">Explore as áreas com maior procura de talento no mercado atual.</p>
             </div>
-            <Button asChild variant="outline">
-              <Link href="/vagas">
-                Ver todas as vagas
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
-          </div>
-
-          {featured.length > 0 ? (
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {featured.map((job) => (
-                <JobCard key={job.id} job={job} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {TOP_CATEGORIES.map((category) => (
+                <CategoryCard
+                  key={category.name}
+                  title={category.name}
+                  icon={category.icon}
+                  href={category.href}
+                />
               ))}
             </div>
-          ) : (
-            <div className="rounded-lg border border-dashed border-border bg-secondary/40 px-6 py-16 text-center">
-              <h3 className="text-lg font-medium">
-                Ainda nao existem vagas publicadas
-              </h3>
-              <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Crie a sua conta e prepare o seu perfil para se candidatar assim
-                que as primeiras oportunidades forem anunciadas.
-              </p>
-              <Button asChild className="mt-6">
-                <Link href="/registar">Criar conta de candidato</Link>
+          </div>
+        </section>
+
+        {/* LATEST JOBS */}
+        <section className="py-24">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Oportunidades em Destaque</h2>
+                <p className="mt-4 text-lg text-muted-foreground">As vagas mais recentes publicadas pelas nossas empresas parceiras.</p>
+              </div>
+              <Button asChild variant="outline" size="lg" className="rounded-full shrink-0 group">
+                <Link href="/vagas">
+                  Ver Todas as Vagas
+                  <ArrowRight className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
-          )}
-        </section>
 
-        {/* How it works */}
-        <section className="border-y border-border bg-secondary/40">
-          <div className="mx-auto w-full max-w-6xl px-5 py-20">
-            <div className="mb-12 flex max-w-2xl flex-col gap-2">
-              <h2 className="text-3xl font-semibold tracking-tight text-balance">
-                Como funciona o processo
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                Um percurso simples e transparente, da inscricao a colocacao na
-                plataforma.
-              </p>
-            </div>
-
-            <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {STEPS.map((step, index) => (
-                <li
-                  key={step.title}
-                  className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-md bg-primary/8 text-primary">
-                      <step.icon className="size-5" aria-hidden="true" />
-                    </span>
-                    <span
-                      className="font-mono text-2xl font-semibold text-border"
-                      aria-hidden="true"
-                    >
-                      0{index + 1}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold tracking-tight">{step.title}</h3>
-                  <p className="text-sm leading-relaxed text-muted-foreground">
-                    {step.text}
-                  </p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        {/* Areas */}
-        <section className="mx-auto w-full max-w-6xl px-5 py-20">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div className="flex flex-col gap-6">
-              <h2 className="text-3xl font-semibold tracking-tight text-balance">
-                Areas em que recrutamos
-              </h2>
-              <p className="leading-relaxed text-muted-foreground">
-                Trabalhamos com operadoras e prestadoras de servicos em toda a
-                cadeia de valor do petroleo e gas, do upstream offshore as
-                operacoes de apoio em terra.
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {JOB_CATEGORIES.map((category) => (
-                  <li key={category}>
-                    <Link
-                      href={`/vagas?category=${encodeURIComponent(category)}`}
-                      className="inline-flex rounded-full border border-border bg-card px-3.5 py-1.5 text-sm text-foreground transition-colors hover:border-primary/40 hover:text-primary"
-                    >
-                      {category}
-                    </Link>
-                  </li>
+            {featured.length > 0 ? (
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {featured.map((job) => (
+                  <JobCard key={job.id} job={job} />
                 ))}
-              </ul>
-            </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed bg-secondary/50 p-16 text-center">
+                <div className="flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary mb-4">
+                  <Search className="size-8" />
+                </div>
+                <h3 className="text-xl font-semibold">Nenhuma vaga publicada de momento</h3>
+                <p className="mt-2 text-muted-foreground max-w-md text-balance">
+                  As nossas empresas parceiras estão a preparar novas oportunidades. Crie o seu perfil para ser notificado assim que surgirem vagas.
+                </p>
+                <Button asChild size="lg" className="mt-8 rounded-full">
+                  <Link href="/registar">Criar Perfil Grátis</Link>
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
 
-            <div className="relative aspect-4/3 overflow-hidden rounded-lg border border-border">
-              <Image
-                src="/images/offshore-workers.png"
-                alt="Equipa de tecnicos offshore em equipamento de protecao a analisar documentacao na plataforma"
-                fill
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-cover"
-              />
+        {/* REVOLUTIONARY TOOLS & INTERVIEWS (BENTO GRID) */}
+        <section className="py-24 bg-secondary/30">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="mb-12 text-center max-w-2xl mx-auto">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">O Futuro das Entrevistas e Avaliações</h2>
+              <p className="mt-4 text-lg text-muted-foreground">Tecnologia de ponta para conectar os melhores talentos às grandes oportunidades.</p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6">
+              <div className="md:col-span-2 rounded-3xl bg-card border shadow-sm p-8 flex flex-col justify-between overflow-hidden relative group">
+                <div className="relative z-10">
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-6">
+                    <Video className="size-6" />
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-3">Entrevistas de trabalho por vídeo</h3>
+                  <p className="text-muted-foreground text-lg mb-4 max-w-md">
+                    Sem deslocações, sem incómodos. Receba convites online por parte dos empregadores e aceda diretamente à sua entrevista através de um link seguro.
+                  </p>
+                </div>
+                <div className="absolute right-0 bottom-0 opacity-10 group-hover:opacity-20 transition-opacity translate-x-1/4 translate-y-1/4">
+                  <Video className="size-64" />
+                </div>
+              </div>
+              
+              <div className="rounded-3xl bg-card border shadow-sm p-8 flex flex-col justify-between">
+                <div>
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600 mb-6">
+                    <MonitorSmartphone className="size-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">Desde qualquer dispositivo</h3>
+                  <p className="text-muted-foreground">
+                    Acompanhe o seu recrutamento onde quer que esteja. Disponível para computador, tablet ou telemóvel.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="rounded-3xl bg-card border shadow-sm p-8 flex flex-col justify-between">
+                <div>
+                  <div className="flex size-12 items-center justify-center rounded-xl bg-orange-500/10 text-orange-600 mb-6">
+                    <BrainCircuit className="size-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3">Conheça-se melhor</h3>
+                  <p className="text-muted-foreground">
+                    Conheça em detalhe os seus pontos fortes e fracos, permitindo-lhe evoluir na sua carreira.
+                  </p>
+                </div>
+              </div>
+
+              <div className="md:col-span-2 rounded-3xl bg-emerald-950 text-white p-8 flex flex-col sm:flex-row gap-8 items-center overflow-hidden relative">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
+                <div className="relative z-10 flex-1">
+                  <span className="inline-block rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 mb-4">
+                    Ferramentas de avaliação revolucionárias
+                  </span>
+                  <h3 className="text-2xl font-semibold mb-3">Testes de Competências</h3>
+                  <p className="text-emerald-100/80 text-lg">
+                    Agora com a Valor Potencial, os empregadores podem solicitar aos candidatos a realização de testes de competências ou exames psicotécnicos 100% online.
+                  </p>
+                </div>
+                <div className="relative z-10 flex flex-col gap-3 w-full sm:w-auto">
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3 backdrop-blur-sm">
+                    <Target className="size-5 text-emerald-400 shrink-0" />
+                    <span className="text-sm font-medium">Melhor correspondência de vagas</span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3 backdrop-blur-sm">
+                    <ShieldCheck className="size-5 text-emerald-400 shrink-0" />
+                    <span className="text-sm font-medium">Sistema transparente</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="border-t border-border bg-primary">
-          <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 px-5 py-16 md:flex-row md:items-center md:justify-between">
-            <div className="flex flex-col gap-2">
-              <h2 className="text-2xl font-semibold tracking-tight text-primary-foreground text-balance md:text-3xl">
-                Pronto para dar o proximo passo na sua carreira?
-              </h2>
-              <p className="max-w-xl leading-relaxed text-primary-foreground/80">
-                Crie o seu perfil de candidato gratuitamente e mantenha os seus
-                documentos sempre prontos para novas oportunidades.
-              </p>
+        {/* PROCESS SIMPLIFICATION SECTION */}
+        <section className="py-24">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-6">
+                  A Valor Potencial <span className="text-primary">simplifica</span> o processo de recrutamento
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Construímos uma plataforma focada no utilizador, garantindo que o seu talento encontra a oportunidade certa no momento certo.
+                </p>
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Target className="size-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Procura adaptada</h4>
+                      <p className="text-sm text-muted-foreground mt-1">Totalmente ajustada às suas necessidades.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Zap className="size-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Mais rápido</h4>
+                      <p className="text-sm text-muted-foreground mt-1">O recrutamento mais célere do mercado.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <CheckCircle2 className="size-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Sistema transparente</h4>
+                      <p className="text-sm text-muted-foreground mt-1">Acompanhe cada fase do processo.</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <HeartHandshake className="size-4" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-foreground">Atenção ao candidato</h4>
+                      <p className="text-sm text-muted-foreground mt-1">Serviço de apoio humanizado.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/5 rounded-3xl transform rotate-3 scale-105" />
+                <div className="relative bg-card border shadow-xl rounded-3xl p-8">
+                  <Image 
+                    src="/images/offshore-workers.png" 
+                    alt="Trabalhadores offshore Valor Potencial"
+                    width={600}
+                    height={400}
+                    className="rounded-xl w-full object-cover aspect-video mb-6"
+                  />
+                  <div className="flex items-center gap-4 bg-secondary/50 p-4 rounded-xl">
+                    <div className="size-12 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
+                      <LineChart className="size-6 text-emerald-600" />
+                    </div>
+                    <div>
+                      <p className="font-medium">O seu perfil está completo</p>
+                      <p className="text-sm text-muted-foreground">Está pronto para as melhores oportunidades.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <Button asChild size="lg" variant="secondary" className="shrink-0">
-              <Link href="/registar">
-                Comecar agora
-                <ArrowRight className="size-4" />
-              </Link>
-            </Button>
+          </div>
+        </section>
+
+        {/* SPLIT CTA SECTION */}
+        <section className="py-24 bg-primary/5">
+          <div className="mx-auto max-w-7xl px-5">
+            <div className="grid lg:grid-cols-2 gap-8">
+              {/* Candidate CTA */}
+              <div className="relative overflow-hidden rounded-3xl bg-emerald-950 p-10 sm:p-14">
+                <div className="relative z-10 flex flex-col h-full items-start">
+                  <span className="inline-block rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 mb-6">
+                    Para Candidatos
+                  </span>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-balance">
+                    Dê o próximo passo na sua carreira
+                  </h3>
+                  <p className="text-emerald-100/80 mb-10 text-lg">
+                    Crie o seu perfil profissional, anexe o seu CV e seja descoberto pelas maiores operadoras e empresas de recrutamento do país.
+                  </p>
+                  <div className="mt-auto">
+                    <Button asChild size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white rounded-full px-8">
+                      <Link href="/registar">Registar Gratuitamente</Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="absolute -bottom-24 -right-24 size-96 rounded-full bg-emerald-800/30 blur-3xl" />
+              </div>
+
+              {/* Employer CTA */}
+              <div className="relative overflow-hidden rounded-3xl bg-card border shadow-sm p-10 sm:p-14">
+                <div className="relative z-10 flex flex-col h-full items-start">
+                  <span className="inline-block rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary mb-6">
+                    Para Empresas
+                  </span>
+                  <h3 className="text-3xl sm:text-4xl font-bold text-foreground mb-4 text-balance">
+                    Recrute os melhores talentos de Angola
+                  </h3>
+                  <p className="text-muted-foreground mb-10 text-lg">
+                    Aceda a uma base de dados exclusiva de profissionais qualificados e certificados para o setor energético e industrial.
+                  </p>
+                  <div className="mt-auto">
+                    <Button asChild variant="outline" size="lg" className="rounded-full px-8 border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                      <Link href="/contacto">Falar com Consultor</Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="absolute -top-24 -right-24 size-96 rounded-full bg-primary/5 blur-3xl" />
+              </div>
+            </div>
           </div>
         </section>
       </main>

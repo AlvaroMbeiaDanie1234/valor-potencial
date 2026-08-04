@@ -12,6 +12,8 @@ import {
 import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
 
+import { LogoutButton } from "@/components/logout-button"
+
 const NAV_LINKS = [
   { href: "/vagas", label: "Vagas" },
   { href: "/sobre", label: "Sobre nos" },
@@ -56,6 +58,7 @@ export async function SiteHeader() {
                 <LayoutDashboard className="size-4 mr-2" />
                 Meu painel
               </Link>
+              <LogoutButton variant="ghost" />
             </>
           ) : (
             <>
@@ -102,6 +105,7 @@ export async function SiteHeader() {
                   <Link href="/painel" className={buttonVariants({ className: "w-full" })}>
                     Meu painel
                   </Link>
+                  <LogoutButton variant="outline" className="w-full" />
                 </>
               ) : (
                 <>
