@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { LayoutDashboard, Menu, ShieldCheck } from "lucide-react"
 import { Logo } from "@/components/brand/logo"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 import { getCurrentUser } from "@/lib/session"
+import { cn } from "@/lib/utils"
 
 const NAV_LINKS = [
   { href: "/vagas", label: "Vagas" },
@@ -46,38 +47,32 @@ export async function SiteHeader() {
           {user ? (
             <>
               {user.role === "admin" && (
-                <Button asChild variant="ghost" size="sm">
-                  <Link href="/admin">
-                    <ShieldCheck className="size-4" />
-                    Administracao
-                  </Link>
-                </Button>
-              )}
-              <Button asChild size="sm">
-                <Link href="/painel">
-                  <LayoutDashboard className="size-4" />
-                  Meu painel
+                <Link href="/admin" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+                  <ShieldCheck className="size-4 mr-2" />
+                  Administração
                 </Link>
-              </Button>
+              )}
+              <Link href="/painel" className={buttonVariants({ size: "sm" })}>
+                <LayoutDashboard className="size-4 mr-2" />
+                Meu painel
+              </Link>
             </>
           ) : (
             <>
-              <Button asChild variant="ghost" size="sm">
-                <Link href="/entrar">Entrar</Link>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/registar">Criar conta</Link>
-              </Button>
+              <Link href="/entrar" className={buttonVariants({ variant: "ghost", size: "sm" })}>
+                Entrar
+              </Link>
+              <Link href="/registar" className={buttonVariants({ size: "sm" })}>
+                Criar conta
+              </Link>
             </>
           )}
         </div>
 
         {/* Mobile */}
         <Sheet>
-          <SheetTrigger asChild className="md:hidden">
-            <Button variant="outline" size="icon" aria-label="Abrir menu">
-              <Menu className="size-4" />
-            </Button>
+          <SheetTrigger className={cn(buttonVariants({ variant: "outline", size: "icon" }), "md:hidden")} aria-label="Abrir menu">
+            <Menu className="size-4" />
           </SheetTrigger>
           <SheetContent side="right" className="w-72">
             <SheetHeader>
@@ -85,7 +80,7 @@ export async function SiteHeader() {
                 <Logo showText={false} />
               </SheetTitle>
             </SheetHeader>
-            <nav className="flex flex-col gap-1 px-4">
+            <nav className="flex flex-col gap-1 px-4 mt-6">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
@@ -100,22 +95,22 @@ export async function SiteHeader() {
               {user ? (
                 <>
                   {user.role === "admin" && (
-                    <Button asChild variant="outline" className="w-full">
-                      <Link href="/admin">Administracao</Link>
-                    </Button>
+                    <Link href="/admin" className={buttonVariants({ variant: "outline", className: "w-full" })}>
+                      Administração
+                    </Link>
                   )}
-                  <Button asChild className="w-full">
-                    <Link href="/painel">Meu painel</Link>
-                  </Button>
+                  <Link href="/painel" className={buttonVariants({ className: "w-full" })}>
+                    Meu painel
+                  </Link>
                 </>
               ) : (
                 <>
-                  <Button asChild variant="outline" className="w-full">
-                    <Link href="/entrar">Entrar</Link>
-                  </Button>
-                  <Button asChild className="w-full">
-                    <Link href="/registar">Criar conta</Link>
-                  </Button>
+                  <Link href="/entrar" className={buttonVariants({ variant: "outline", className: "w-full" })}>
+                    Entrar
+                  </Link>
+                  <Link href="/registar" className={buttonVariants({ className: "w-full" })}>
+                    Criar conta
+                  </Link>
                 </>
               )}
             </div>

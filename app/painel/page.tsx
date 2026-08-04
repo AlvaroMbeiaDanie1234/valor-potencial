@@ -5,6 +5,9 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { COMPANY } from "@/lib/constants"
 import { requireUserPage } from "@/lib/session"
+import { db } from "@/lib/db"
+import { candidateProfiles } from "@/lib/db/schema"
+import { eq } from "drizzle-orm"
 
 export const metadata: Metadata = {
   title: `Painel do Candidato | ${COMPANY.name}`,
@@ -12,6 +15,9 @@ export const metadata: Metadata = {
 
 export default async function PainelPage() {
   const user = await requireUserPage()
+  
+  const existingProfile = await db.select().from(candidateProfiles).where(eq(candidateProfiles.userId, user.id))
+  const profile = existingProfile[0]
 
   return (
     <div className="flex min-h-svh flex-col">
@@ -26,6 +32,21 @@ export default async function PainelPage() {
               Bem-vindo ao seu painel de candidato da {COMPANY.name}.
             </p>
           </div>
+
+          {profile?.interviewScheduled && (
+            <div className="mb-8 rounded-xl border border-emerald-500/30 bg-emerald-50 p-6 dark:bg-emerald-500/10 flex items-start gap-4">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                <Briefcase className="size-5" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-emerald-700 dark:text-emerald-400">Parabéns! Foi selecionado(a) para uma Entrevista.</h3>
+                <p className="mt-1 text-emerald-600/90 dark:text-emerald-400/90">
+                  O seu perfil destacou-se e a nossa equipa gostaria de conversar consigo. 
+                  Esteja atento(a) ao seu telefone e email cadastrados no perfil, pois entraremos em contacto em breve com os detalhes da marcação.
+                </p>
+              </div>
+            </div>
+          )}
 
           <div className="grid gap-6 md:grid-cols-3">
             {/* Perfil */}

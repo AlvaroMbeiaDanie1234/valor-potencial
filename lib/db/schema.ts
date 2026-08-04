@@ -117,6 +117,8 @@ export const candidateProfiles = pgTable("candidate_profiles", {
   linkedin: text("linkedin"),
   availableFrom: text("available_from"),
   willingOffshore: boolean("willing_offshore").default(true).notNull(),
+  verificationStatus: text("verification_status").default("incompleto").notNull(),
+  interviewScheduled: boolean("interview_scheduled").default(false).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 })
